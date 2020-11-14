@@ -1,3 +1,5 @@
+from generator import SpringBoot
+
 print("Spring-web Generator V1.0")
 print("Copyright (c) 2020 Christophe Daloz - De Los Rios")
 
@@ -13,6 +15,9 @@ def answer():
 
     print("Version of Java:")
     configuration['java'] = input()
+
+    print("Version of project:")
+    configuration['project_version'] = input()
 
     print("Package name:")
     configuration['package_name'] = input()
@@ -40,6 +45,7 @@ def summary():
     print("-------")
     print("Version of Spring Boot: " + configuration['spring_boot'])
     print("Version of Java: " + configuration['java'])
+    print("Version of project: " + configuration['project_version'])
     print("Package name: " + configuration['package_name'])
     print("Name of project: " + configuration['name'])
     print("Description: " + configuration['description'])
@@ -49,9 +55,23 @@ def summary():
     print('Confirm generation ? [Y/n]')
 
     confirmation = input()
+    print("")
     confirmation = 'y' if not confirmation else confirmation
 
 
 while confirmation.lower() != 'y':
     answer()
     summary()
+
+spring_generator = SpringBoot(
+    configuration['spring_boot'],
+    configuration['java'],
+    configuration['project_version'],
+    configuration['package_name'],
+    configuration['name'],
+    configuration['description'],
+    configuration['group'],
+    configuration['group'],
+    configuration['location']
+)
+spring_generator.generate()
